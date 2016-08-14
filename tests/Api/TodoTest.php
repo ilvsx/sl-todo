@@ -60,8 +60,13 @@ class TodoTest extends BaseApiTestCase
         ];
 
         $this->post("todos", $data);
-        $this->assertResponseStatus(201);
+        $this->assertResponseStatus(200);
 
+        $todo = Todo::where('title', $todo->title)->first();
+        $this->seeJson([
+            'id' => $todo->id,
+            'title' => $todo->title
+        ]);
         $this->seeInDatabase('todos', [
             'title' => $todo->title
         ]);
