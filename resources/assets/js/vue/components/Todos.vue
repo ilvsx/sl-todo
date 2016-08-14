@@ -4,7 +4,9 @@
     <input v-model="newTodo">
     <button v-on:click="addTodo">+</button>
     <ul v-for="todo in todos">
-        <li>{{todo.title}} <button v-on:click="delTodo(todo)">-</button> </li>
+        <li>{{todo.title}}
+            <button v-on:click="delTodo(todo)">-</button>
+        </li>
     </ul>
 
 </template>
@@ -17,8 +19,8 @@
         data(){
             return {
                 todos: [
-                    {title: 'a'},
-                    {title: 'b'},
+                    {id: 1, title: 'a'},
+                    {id: 2, title: 'b'},
                 ],
                 newTodo: ''
             }
@@ -34,18 +36,25 @@
         },
         methods: {
             get_todos(){
-                this.todos = [
-                    {title: 'c'},
-                    {title: 'd'},
-                ]
+                var resource = this.$resource('todos', {});
+
+                resource.get().then(function (response) {
+                    this.$set('todos', response.data.data);
+                });
             },
             addTodo(){
-                this.todos.push(
-                    {title: this.newTodo}
-                )
+                var resource = this.$resource('todos', {});
+
+                resource.save({title: this.newTodo}).then(function (response) {
+                    this.todos.push(response.data.data);
+                });
             },
             delTodo(todo){
-                this.todos.$remove(todo);
+                var resource = this.$resource('todos{/id}', {});
+
+                resource.delete({id: todo.id}).then(function () {
+                    this.todos.$remove(todo);
+                });
             },
             editTodo(todo, title){
                 todo.title = title;
