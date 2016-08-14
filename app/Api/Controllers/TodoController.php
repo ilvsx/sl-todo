@@ -49,11 +49,11 @@ class TodoController extends BaseController
     public function store(Request $request){
         $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-        $this->todoRepository->create([
+        $todo = $this->todoRepository->create([
             'title' => $request->title
         ]);
 
-        return $this->response->created();
+        return $this->response->item($todo, new TodoTransformer());
     }
 
 }
