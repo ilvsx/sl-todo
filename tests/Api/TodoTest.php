@@ -23,4 +23,42 @@ class TodoTest extends BaseApiTestCase
         });
     }
 
+    /** @test */
+    public function del_todo(){
+        $todo = factory(Todo::class)->create();
+
+        $this->delete("todos/{$todo->id}");
+
+        $this->assertResponseStatus(204);
+        $this->notSeeInDatabase('todos', [
+            'title' => $todo->title
+        ]);
+
+    }
+
+    public function update_todo(){
+        $todo_one = factory(Todo::class)->create();
+        $todo_two = factory(Todo::class)->make();
+
+        $data = [
+            'title' => $todo_two
+        ];
+
+        $this->seeInDatabase('todos', [
+            'title' => $todo_two->title
+        ]);
+    }
+
+    public function add_todo(){
+        $todo = factory(Todo::class)->make();
+
+        $data = [
+            'title' => $todo->title
+        ];
+
+        $this->seeInDatabase('todos', [
+            'title' => $todo->title
+        ]);
+    }
+
 }
