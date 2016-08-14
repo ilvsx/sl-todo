@@ -3,9 +3,10 @@
 namespace Someline\Api\Controllers;
 
 use Illuminate\Http\Request;
-use Someline\Models\Foundation\Todo;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Someline\Repositories\Interfaces\TodoRepository;
 use Someline\Transformers\TodoTransformer;
+use Someline\Validators\TodoValidator;
 
 class TodoController extends BaseController
 {
@@ -14,10 +15,15 @@ class TodoController extends BaseController
      * @var TodoRepository
      */
     private $todoRepository;
+    /**
+     * @var TodoValidator
+     */
+    private $validator;
 
-    public function __construct(TodoRepository $todoRepository)
+    public function __construct(TodoRepository $todoRepository, TodoValidator $validator)
     {
         $this->todoRepository = $todoRepository;
+        $this->validator = $validator;
     }
 
     public function _list(){
@@ -33,12 +39,16 @@ class TodoController extends BaseController
     }
 
     public function update($todo_id, Request $request){
+        $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
         $this->todoRepository->update(['title' => $request->title], $todo_id);
 
         return $this->response->noContent();
     }
 
     public function store(Request $request){
+        $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+
         $this->todoRepository->create([
             'title' => $request->title
         ]);
