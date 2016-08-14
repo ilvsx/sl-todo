@@ -1,4 +1,5 @@
 import UserList from './vue/components/UserList.vue'
+import Todos from './vue/components/Todos.vue'
 
 export default {
     data: {
@@ -7,6 +8,7 @@ export default {
     },
     components: {
         'sl-user-list': UserList,
+        'sl-todos': Todos,
     },
     methods: {
         initLocale(){

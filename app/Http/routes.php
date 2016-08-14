@@ -28,5 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('users', 'UserController@getUserList');
+    Route::get('todos', function(){
+        return view('todos.todos');
+    });
 
 });
