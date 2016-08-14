@@ -56,5 +56,9 @@ $api->version('v1', [
 
     });
 
+    $api->get('todos', function(){
+        return 'todos';
+    });
+
 
 });
