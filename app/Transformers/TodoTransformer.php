@@ -21,6 +21,7 @@ class TodoTransformer extends BaseTransformer
     public function transform(Todo $model)
     {
         return [
+            'id' => (int)$model->id,
             'title' => (string)$model->title,
 
             'created_at' => (string)$model->created_at,
