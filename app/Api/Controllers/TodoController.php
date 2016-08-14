@@ -33,10 +33,17 @@ class TodoController extends BaseController
     }
 
     public function update($todo_id, Request $request){
-
         $this->todoRepository->update(['title' => $request->title], $todo_id);
 
         return $this->response->noContent();
+    }
+
+    public function store(Request $request){
+        $this->todoRepository->create([
+            'title' => $request->title
+        ]);
+
+        return $this->response->created();
     }
 
 }

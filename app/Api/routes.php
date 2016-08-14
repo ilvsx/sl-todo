@@ -60,6 +60,7 @@ $api->version('v1', [
         $api->get('/', 'TodoController@_list');
         $api->delete('/{todo_id}', 'TodoController@delete');
         $api->put('/{todo_id}', 'TodoController@update');
+        $api->post('/', 'TodoController@store');
     });
 
 
