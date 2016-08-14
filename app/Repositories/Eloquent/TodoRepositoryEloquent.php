@@ -14,6 +14,10 @@ use Someline\Validators\TodoValidator;
  */
 class TodoRepositoryEloquent extends BaseRepository implements TodoRepository
 {
+    protected $fieldSearchable = [
+        'is_done'
+    ];
+
     /**
      * Specify Model class name
      *

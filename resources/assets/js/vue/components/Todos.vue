@@ -1,12 +1,20 @@
 <template>
 
-    <h1>TODOS</h1>
+    <h1>Todos</h1>
     <input v-model="newTodo">
     <button v-on:click="addTodo">+</button>
     <ul v-for="todo in todos">
         <li>{{todo.title}}
-            <button v-on:click="delTodo(todo)">-</button>
+            <button v-on:click="delTodo(todo)">Del</button>
+            <button v-on:click="doneTodo(todo)">Done</button>
         </li>
+    </ul>
+
+    <hr>
+
+    <h1>Done Todos</h1>
+    <ul v-for="todo in doneTodos">
+        <li>{{todo.title}}</li>
     </ul>
 
 </template>
@@ -21,6 +29,8 @@
                 todos: [
                     {id: 1, title: 'a'},
                     {id: 2, title: 'b'},
+                ],
+                doneTodos: [
                 ],
                 newTodo: ''
             }
@@ -56,8 +66,12 @@
                     this.todos.$remove(todo);
                 });
             },
-            editTodo(todo, title){
-                todo.title = title;
+            doneTodo(todo){
+                var resource = this.$resource('todos{/id}', {});
+
+                resource.update({id: todo.id}, {is_done: 1}).then(function () {
+                    this.doneTodos.push(todo);
+                });
             }
         }
     }

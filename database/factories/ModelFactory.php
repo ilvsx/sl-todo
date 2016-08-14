@@ -30,6 +30,7 @@ $factory->define(\Someline\Models\Foundation\User::class, function (Faker\Genera
 
 $factory->define(\Someline\Models\Foundation\Todo::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->title,
+        'title' => str_random(10),
+        'is_done' => $faker->randomElement([0, 1])
     ];
 });

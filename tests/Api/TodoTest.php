@@ -13,9 +13,12 @@ class TodoTest extends BaseApiTestCase
 
     /** @test */
     public function get_todos(){
-        $todos = factory(Todo::class, 3)->create();
+        $todos = factory(Todo::class, 3)->create([
+            'is_done' => 1
+        ]);
 
-        $this->get('todos');
+        $this->get('todos' . '?search=is_done:0');
+        $this->dump();
         $todos->map(function(Todo $todo){
             $this->seeJson([
                 'title' => $todo->title
