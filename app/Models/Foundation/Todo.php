@@ -7,6 +7,8 @@ use Someline\Models\BaseModel;
 /**
  * @property string title
  * @property int id
+ * @property string created_at
+ * @property string updated_at
  */
 class Todo extends BaseModel
 {

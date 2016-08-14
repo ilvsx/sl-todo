@@ -56,9 +56,7 @@ $api->version('v1', [
 
     });
 
-    $api->get('todos', function(){
-        return 'todos';
-    });
+    $api->get('todos', 'TodoController@_list');
 
 
 });

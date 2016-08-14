@@ -27,3 +27,9 @@ $factory->define(\Someline\Models\Foundation\User::class, function (Faker\Genera
         'status' => 1,
     ];
 });
+
+$factory->define(\Someline\Models\Foundation\Todo::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->title,
+    ];
+});
