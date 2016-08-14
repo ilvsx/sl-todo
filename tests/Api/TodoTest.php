@@ -9,7 +9,7 @@ use Someline\Models\Foundation\Todo;
 
 class TodoTest extends BaseApiTestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     /** @test */
     public function get_todos(){
@@ -21,7 +21,6 @@ class TodoTest extends BaseApiTestCase
                 'title' => $todo->title
             ]);
         });
-
     }
 
 }
