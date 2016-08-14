@@ -12,7 +12,8 @@ class TodoValidator extends LaravelValidator {
             'title' => 'required|string',
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'title' => 'required|string',
+            'title' => 'string',
+            'is_done' => 'int|in:1'
         ],
    ];
 

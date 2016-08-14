@@ -41,7 +41,7 @@ class TodoController extends BaseController
     public function update($todo_id, Request $request){
         $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-        $this->todoRepository->update(['title' => $request->title], $todo_id);
+        $this->todoRepository->update($request->all(), $todo_id);
 
         return $this->response->noContent();
     }

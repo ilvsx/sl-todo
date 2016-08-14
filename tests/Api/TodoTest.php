@@ -72,4 +72,21 @@ class TodoTest extends BaseApiTestCase
         ]);
     }
 
+    /** @test */
+    public function done_todo(){
+        $todo = factory(Todo::class)->create();
+        $data = [
+            'is_done' => 1
+        ];
+
+        $this->put("todos/{$todo->id}", $data);
+
+        $this->assertResponseStatus(204);
+        $this->seeInDatabase('todos', [
+            'id' => $todo->id,
+            'title' => $todo->title,
+            'is_done' => 1
+        ]);
+    }
+
 }
