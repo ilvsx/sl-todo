@@ -36,14 +36,17 @@ class TodoTest extends BaseApiTestCase
 
     }
 
+    /** @test */
     public function update_todo(){
         $todo_one = factory(Todo::class)->create();
         $todo_two = factory(Todo::class)->make();
-
         $data = [
-            'title' => $todo_two
+            'title' => $todo_two->title
         ];
 
+        $this->put("todos/{$todo_one->id}", $data);
+
+        $this->assertResponseStatus(204);
         $this->seeInDatabase('todos', [
             'title' => $todo_two->title
         ]);

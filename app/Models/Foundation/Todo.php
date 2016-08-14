@@ -19,6 +19,7 @@ class Todo extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'title'
     ];
 
     /**
