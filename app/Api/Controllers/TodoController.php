@@ -25,4 +25,10 @@ class TodoController extends BaseController
         return $this->response->collection($todos, new TodoTransformer());
     }
 
+    public function delete($todo_id){
+        $todo = $this->todoRepository->delete($todo_id);
+
+        return $this->response->noContent();
+    }
+
 }

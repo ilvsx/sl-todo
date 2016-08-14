@@ -56,7 +56,10 @@ $api->version('v1', [
 
     });
 
-    $api->get('todos', 'TodoController@_list');
+    $api->group(['prefix' => 'todos'], function(\Dingo\Api\Routing\Router $api){
+        $api->get('/', 'TodoController@_list');
+        $api->delete('/{todo_id}', 'TodoController@delete');
+    });
 
 
 });
