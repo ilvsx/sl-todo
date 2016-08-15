@@ -9,6 +9,7 @@ use Someline\Models\BaseModel;
  * @property int id
  * @property string created_at
  * @property string updated_at
+ * @property int is_done
  */
 class Todo extends BaseModel
 {

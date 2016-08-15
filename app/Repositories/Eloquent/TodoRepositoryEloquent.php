@@ -2,7 +2,6 @@
 
 namespace Someline\Repositories\Eloquent;
 
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Someline\Models\Foundation\Todo;
 use Someline\Repositories\Interfaces\TodoRepository;
